@@ -1,0 +1,4 @@
+# Astra Mock Lab Proxies
+http://127.0.0.1:18081
+http://127.0.0.1:18082
+http://127.0.0.1:18083

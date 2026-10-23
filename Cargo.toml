@@ -1,0 +1,34 @@
+[package]
+name = "astra"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "http2", "socks"] }
+tokio = { version = "1", features = ["full"] }
+hdrhistogram = "7.5"
+rlimit = "0.10"
+indicatif = { version = "0.17", features = ["improved_unicode"] }
+colored = "2.1"
+parking_lot = "0.12"
+tokio-util = "0.7"
+futures = "0.3"
+core_affinity = "0.8"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
+debug = false
+incremental = false
+overflow-checks = false
+
+# Ensure every transitive dependency is compiled with the same maximum
+# optimization level, even when a crate ships its own release profile.
+[profile.release.package."*"]
+opt-level = 3
+codegen-units = 1
